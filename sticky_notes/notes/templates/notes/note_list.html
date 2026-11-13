@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}All notes{% endblock %}
+
+{% block content %}
+    <h2>All notes</h2>
+    {% if notes %}
+        <div class="notes">
+            {% for note in notes %}
+                <div class="note">
+                    <h3><a href="{% url 'note_detail' pk=note.pk %}">{{ note.title }}</a></h3>
+                    <p>{{ note.content|truncatewords:25 }}</p>
+                    <small>{{ note.created_at|date:"d M Y, H:i" }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No notes yet. <a href="{% url 'note_create' %}">Add your first note.</a></p>
+    {% endif %}
+{% endblock %}
